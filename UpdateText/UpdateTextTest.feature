@@ -18,7 +18,6 @@ Scenario: Standard way
 	"""
 	And I have following text in my translation file
 	"""
-
 	"""
 	When I try to sync
 	Then I should get following text in my translation file

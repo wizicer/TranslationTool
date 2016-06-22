@@ -78,15 +78,15 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
 #line 19
  testRunner.And("I have following text in my translation file", "", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
+#line 22
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 24
+#line 23
  testRunner.Then("I should get following text in my translation file", "<!--\r\n# title\r\n\r\nhello world\r\n\r\n-->\r\n\r\n<!--\r\n##section1\r\nlorel anaditum\r\n\r\n-->\r\n\r" +
                     "\n<!--\r\n## section2 -- with a long name even <span class=\"active\">span</span> in " +
                     "it\r\n**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 44
+#line 43
  testRunner.Given("I have following text in source file", @"# title
 
 hello world
@@ -97,10 +97,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 56
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 58
+#line 57
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
@@ -128,27 +128,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         public virtual void UpdateWithOutOfOrderSection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("update with out of order section", ((string[])(null)));
-#line 80
+#line 79
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-#line 81
+#line 80
  testRunner.Given("I have following text in source file", "# title\r\n\r\nhello world\r\n\r\n## section0 which added later\r\n\r\n##section1\r\nlorel anad" +
                     "itum\r\n\r\n## section2 -- with a long name even <span class=\"active\">span</span> in" +
                     " it\r\n**lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 95
+#line 94
  testRunner.And("I have following text in my translation file", "<!--\r\n# title\r\n\r\nhello world\r\n-->\r\n\r\n<!--\r\n##section1\r\nlorel anaditum\r\n-->\r\n\r\n<!-" +
                     "-\r\n## section2 -- with a long name even <span class=\"active\">span</span> in it\r\n" +
                     "**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 113
+#line 112
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 114
+#line 113
  testRunner.Then("I should get following text in my translation file", "<!--\r\n# title\r\n\r\nhello world\r\n-->\r\n\r\n<!--\r\n## section0 which added later\r\n-->\r\n\r\n" +
                     "<!--\r\n##section1\r\nlorel anaditum\r\n-->\r\n\r\n<!--\r\n## section2 -- with a long name e" +
                     "ven <span class=\"active\">span</span> in it\r\n**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 136
+#line 135
  testRunner.Given("I have following text in source file", @"# title
 
 hello world
@@ -159,10 +159,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 149
+#line 148
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 150
+#line 149
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
