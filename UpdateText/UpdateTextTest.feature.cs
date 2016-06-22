@@ -65,10 +65,10 @@ namespace UpdateText
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Standard way")]
-        public virtual void StandardWay()
+        [NUnit.Framework.DescriptionAttribute("First time generate translation file")]
+        public virtual void FirstTimeGenerateTranslationFile()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Standard way", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("First time generate translation file", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -86,7 +86,18 @@ this.ScenarioSetup(scenarioInfo);
                     "\n<!--\r\n## section2 -- with a long name even <span class=\"active\">span</span> in " +
                     "it\r\n**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 43
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Update translation file")]
+        public virtual void UpdateTranslationFile()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update translation file", ((string[])(null)));
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+#line 45
  testRunner.Given("I have following text in source file", @"# title
 
 hello world
@@ -97,16 +108,41 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 56
+#line hidden
+#line 58
+ testRunner.And("I have following text in my translation file", @"# title
+
+hello world
+-->
+
+title translation
+
+<!--
+##section1
+
+abnormal things.
+-->
+
+section1 translation
+
+<!--
+## section2 -- with a long name even <span class=""active"">span</span> in it
+**lorel anaditum yanaghay**
+-->
+
+section2 translation", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 82
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 57
+#line 83
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
 hello world
 
 -->
+
+title translation
 
 <!--
 ##section1
@@ -115,10 +151,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 -->
 
+section1 translation
+
 <!--
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**
--->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+-->
+
+section2 translation", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -128,27 +168,49 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
         public virtual void UpdateWithOutOfOrderSection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("update with out of order section", ((string[])(null)));
-#line 79
+#line 111
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-#line 80
+#line 112
  testRunner.Given("I have following text in source file", "# title\r\n\r\nhello world\r\n\r\n## section0 which added later\r\n\r\n##section1\r\nlorel anad" +
                     "itum\r\n\r\n## section2 -- with a long name even <span class=\"active\">span</span> in" +
                     " it\r\n**lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 94
+#line 126
  testRunner.And("I have following text in my translation file", "<!--\r\n# title\r\n\r\nhello world\r\n-->\r\n\r\n<!--\r\n##section1\r\nlorel anaditum\r\n-->\r\n\r\n<!-" +
                     "-\r\n## section2 -- with a long name even <span class=\"active\">span</span> in it\r\n" +
                     "**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 112
+#line 144
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 113
- testRunner.Then("I should get following text in my translation file", "<!--\r\n# title\r\n\r\nhello world\r\n-->\r\n\r\n<!--\r\n## section0 which added later\r\n-->\r\n\r\n" +
-                    "<!--\r\n##section1\r\nlorel anaditum\r\n-->\r\n\r\n<!--\r\n## section2 -- with a long name e" +
-                    "ven <span class=\"active\">span</span> in it\r\n**lorel anaditum yanaghay**\r\n-->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 145
+ testRunner.Then("I should get following text in my translation file", @"<!--
+# title
+
+hello world
+-->
+
+title translation
+
+<!--
+## section0 which added later
+-->
+
+<!--
+##section1
+lorel anaditum
+-->
+
+section1 translation
+
+<!--
+## section2 -- with a long name even <span class=""active"">span</span> in it
+**lorel anaditum yanaghay**
+-->
+
+section2 translation", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 135
+#line 173
  testRunner.Given("I have following text in source file", @"# title
 
 hello world
@@ -159,15 +221,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 148
+#line 186
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 149
+#line 187
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
 hello world
 -->
+
+title translation
 
 <!--
 ##section1
@@ -175,10 +239,14 @@ hello world
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 -->
 
+section1 translation
+
 <!--
 ## section2 -- with a long name even <span class=""active"">span</span> in it
 **lorel anaditum yanaghay**
--->", ((TechTalk.SpecFlow.Table)(null)), "Then ");
+-->
+
+section2 translation", ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
