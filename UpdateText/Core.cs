@@ -12,10 +12,12 @@ namespace UpdateText
     {
         public static string Update(string source, string currentTranslation)
         {
+            source = source.Replace("\r\n", "\n");
+            currentTranslation = currentTranslation.Replace("\r\n", "\n");
             var r = new Regex("^#+(?<name>.*)");
             var rr = new Regex(@"<!--\s+#+(?<name>.*)");
-            var rc = new Regex(@"-->\s+(?<content>.*)");
-            var ss = source.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+            var rc = new Regex(@"-->\s+(?<content>.*)", RegexOptions.Singleline);
+            var ss = source.Split(new string[] { "\n" }, StringSplitOptions.None)
                 .Aggregate(new List<string>(), (a, cur) =>
                 {
                     if (r.Match(cur).Success)
@@ -24,14 +26,14 @@ namespace UpdateText
                         return a;
                     }
 
-                    if (a.Count > 0) a[a.Count - 1] += Environment.NewLine + cur;
+                    if (a.Count > 0) a[a.Count - 1] += "\n" + cur;
                     return a;
                 })
                 .Where(_ => !string.IsNullOrEmpty(_))
                 .Select(_ => new Section(r.Match(_).Groups["name"].Value.Trim(), _))
                 .ToArray();
 
-            var ts = currentTranslation.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+            var ts = currentTranslation.Split(new string[] { "\n" }, StringSplitOptions.None)
                 .Aggregate(new List<string>(), (a, cur) =>
                 {
                     if (cur == "<!--")
@@ -40,7 +42,7 @@ namespace UpdateText
                         return a;
                     }
 
-                    if (a.Count > 0) a[a.Count - 1] += Environment.NewLine + cur;
+                    if (a.Count > 0) a[a.Count - 1] += "\n" + cur;
                     return a;
                 })
                 .Where(_ => !string.IsNullOrEmpty(_))
@@ -49,10 +51,10 @@ namespace UpdateText
 
             var result = ss
                 .Select(_ => new { src = _, tran = ts.FirstOrDefault(o => o.Title == _.Title) })
-                .Select(_ => new { src = _.src, tran = _.tran, tranrn = _.tran == null ? "" : "\r\n" })
-                .Select(_ => $"<!--\r\n{_.src.Content}\r\n-->\r\n{_.tranrn}{_.tran?.Content}{_.tranrn}");
+                .Select(_ => new { src = _.src, tran = _.tran, tranrn = _.tran == null ? "" : "\n" })
+                .Select(_ => $"<!--\n{_.src.Content}\n-->\n{_.tranrn}{_.tran?.Content}{_.tranrn}");
 
-            return string.Join("\r\n", result);
+            return string.Join("\n", result).Replace("\n", "\r\n");
 
         }
 

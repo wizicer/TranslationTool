@@ -65,6 +65,7 @@ Scenario: Update translation file
 	-->
 
 	title translation
+	second line
 
 	<!--
 	##section1
@@ -92,6 +93,7 @@ Scenario: Update translation file
 	-->
 
 	title translation
+	second line
 
 	<!--
 	##section1

@@ -117,6 +117,7 @@ hello world
 -->
 
 title translation
+second line
 
 <!--
 ##section1
@@ -132,10 +133,10 @@ section1 translation
 -->
 
 section2 translation", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 85
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 85
+#line 86
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
@@ -144,6 +145,7 @@ hello world
 -->
 
 title translation
+second line
 
 <!--
 ##section1
@@ -170,15 +172,15 @@ section2 translation
         public virtual void UpdateWithOutOfOrderSection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("update with out of order section", ((string[])(null)));
-#line 114
+#line 116
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-#line 115
+#line 117
  testRunner.Given("I have following text in source file", "# title\r\n\r\nhello world\r\n\r\n## section0 which added later\r\n\r\n##section1\r\nlorel anad" +
                     "itum\r\n\r\n## section2 -- with a long name even <span class=\"active\">span</span> in" +
                     " it\r\n**lorel anaditum yanaghay**", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 129
+#line 131
  testRunner.And("I have following text in my translation file", @"<!--
 # title
 
@@ -201,10 +203,10 @@ section1 translation
 -->
 
 section2 translation", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
+#line 156
  testRunner.When("I try to sync", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 155
+#line 157
  testRunner.Then("I should get following text in my translation file", @"<!--
 # title
 
