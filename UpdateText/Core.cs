@@ -13,7 +13,8 @@ namespace UpdateText
         public static string Update(string source, string currentTranslation)
         {
             var r = new Regex("^#+(?<name>.*)");
-            var rr = new Regex(@"<!--\s#+(?<name>.*)");
+            var rr = new Regex(@"<!--\s+#+(?<name>.*)");
+            var rc = new Regex(@"-->\s+(?<content>.*)");
             var ss = source.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
                 .Aggregate(new List<string>(), (a, cur) =>
                 {
@@ -27,7 +28,7 @@ namespace UpdateText
                     return a;
                 })
                 .Where(_ => !string.IsNullOrEmpty(_))
-                .Select(_ => new Section(r.Match(_).Groups["name"].Value, _))
+                .Select(_ => new Section(r.Match(_).Groups["name"].Value.Trim(), _))
                 .ToArray();
 
             var ts = currentTranslation.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
@@ -43,10 +44,15 @@ namespace UpdateText
                     return a;
                 })
                 .Where(_ => !string.IsNullOrEmpty(_))
-                .Select(_ => new Section(r.Match(_).Groups["name"].Value, _))
+                .Select(_ => new Section(rr.Match(_).Groups["name"].Value.Trim(), rc.Match(_).Groups["content"].Value.Trim()))
                 .ToArray();
 
-            return string.Join("\r\n\r\n", ss.Select(_ => $"<!--\r\n{_.Content}\r\n-->"));
+            var result = ss
+                .Select(_ => new { src = _, tran = ts.FirstOrDefault(o => o.Title == _.Title) })
+                .Select(_ => $"<!--\r\n{_.src.Content}\r\n-->\r\n{(_.tran == null ? "" : "\r\n")}{_.tran?.Content}{(_.tran == null ? "" : "\r\n")}");
+
+            //return string.Join("\r\n\r\n", ss.Select(_ => $"<!--\r\n{_.Content}\r\n-->"));
+            return string.Join("\r\n", result);
 
         }
         [DebuggerDisplay("{Title}")]
