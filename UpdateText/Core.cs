@@ -49,12 +49,13 @@ namespace UpdateText
 
             var result = ss
                 .Select(_ => new { src = _, tran = ts.FirstOrDefault(o => o.Title == _.Title) })
-                .Select(_ => $"<!--\r\n{_.src.Content}\r\n-->\r\n{(_.tran == null ? "" : "\r\n")}{_.tran?.Content}{(_.tran == null ? "" : "\r\n")}");
+                .Select(_ => new { src = _.src, tran = _.tran, tranrn = _.tran == null ? "" : "\r\n" })
+                .Select(_ => $"<!--\r\n{_.src.Content}\r\n-->\r\n{_.tranrn}{_.tran?.Content}{_.tranrn}");
 
-            //return string.Join("\r\n\r\n", ss.Select(_ => $"<!--\r\n{_.Content}\r\n-->"));
             return string.Join("\r\n", result);
 
         }
+
         [DebuggerDisplay("{Title}")]
         private class Section
         {
